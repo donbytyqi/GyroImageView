@@ -71,7 +71,7 @@ class GyroImageView: UIView {
         
         motionManager.gyroUpdateInterval = 0.1
         
-        let highestScrollPoint = image.size.width - (UIScreen.main.bounds.width)
+        let highestScrollPoint = image.size.width - UIScreen.main.bounds.width
         let lowestScrollPoint = CGFloat(0.0)
         
         let mainOperationQueue = OperationQueue.main
@@ -96,7 +96,7 @@ class GyroImageView: UIView {
         })
     }
     
-    func setStartPoint() {
+    fileprivate func setStartPoint() {
         guard let image = image else { return }
         
         switch startPoint {
@@ -108,6 +108,17 @@ class GyroImageView: UIView {
             self.scrollView.contentOffset = CGPoint(x: image.size.width - (UIScreen.main.bounds.width), y: 0.0)
         }
         
+    }
+    
+    func startMotionManager() {
+        guard let image = image else { return }
+        animateFor(image: image)
+    }
+    
+    func stopMotionManager() {
+        if motionManager.isGyroActive {
+            motionManager.stopGyroUpdates()
+        }
     }
     
 }
