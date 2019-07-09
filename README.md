@@ -1,7 +1,7 @@
 # GyroImageView
 Utilize your devices gyroscope to scroll through an image.
 
-![](https://i.imgur.com/2gQQvfx.gif)
+<img width="221" height="478" class="spinner" alt="" src="example_images/example.gif" />
 
 ## Installation
 Currently, the only way to install it is manually. Simply download GyroImageView.swift file and drag and drop it to your project folder.
@@ -14,4 +14,6 @@ let gyroImageView = GyroImageView(frame: UIScreen.main.bounds)
 gyroImageView.image = UIImage(named: "test")
 // set scrolling speed
 gyroImageView.speed = 150.0
+// left, middle or right
+gyroImageView.startPoint = .middle
 view.addSubview(gyroImageView)
