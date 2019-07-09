@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let gyroImageView = GyroImageView(frame: UIScreen.main.bounds)
-        gyroImageView.image = UIImage(named: "test4")
+        gyroImageView.image = UIImage(named: "test")
         gyroImageView.speed = 150.0
         gyroImageView.startPoint = .middle
         self.view.addSubview(gyroImageView)

@@ -15,6 +15,24 @@ enum StartPoint {
     case right
 }
 
+
+// Network codet to download an image
+extension GyroImageView {
+    func startURLSession(with url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
+    func downloadImage(from url: URL) {
+        startURLSession(with: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            DispatchQueue.main.async() {
+                self.image = UIImage(data: data)
+                self.layoutSubviews()
+            }
+        }
+    }
+}
+
 class GyroImageView: UIView {
     
     private let motionManager = CMMotionManager()
@@ -35,8 +53,18 @@ class GyroImageView: UIView {
     var image: UIImage? = nil {
         didSet {
             guard let image = image else { return }
+            if imageView.contentMode == .scaleAspectFit  {
+                print("Scale aspect fit isn't recommended, use scaleAspectFill for best results.")
+            }
             imageView.image = image
             animateFor(image: image)
+        }
+    }
+    
+    var imageUrl: String? = nil {
+        didSet {
+            guard let iu = imageUrl, let url = URL(string: iu) else { return }
+            downloadImage(from: url)
         }
     }
     
