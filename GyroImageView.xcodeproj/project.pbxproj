@@ -12,6 +12,7 @@
 		F67154E622D4DD6500BDF38C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F67154E422D4DD6500BDF38C /* Main.storyboard */; };
 		F67154E822D4DD6600BDF38C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F67154E722D4DD6600BDF38C /* Assets.xcassets */; };
 		F67154EB22D4DD6600BDF38C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F67154E922D4DD6600BDF38C /* LaunchScreen.storyboard */; };
+		F67154F322D4DD7B00BDF38C /* GyroImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67154F222D4DD7B00BDF38C /* GyroImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		F67154E722D4DD6600BDF38C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F67154EA22D4DD6600BDF38C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F67154EC22D4DD6600BDF38C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F67154F222D4DD7B00BDF38C /* GyroImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				F67154E022D4DD6500BDF38C /* AppDelegate.swift */,
 				F67154E222D4DD6500BDF38C /* ViewController.swift */,
+				F67154F222D4DD7B00BDF38C /* GyroImageView.swift */,
 				F67154E422D4DD6500BDF38C /* Main.storyboard */,
 				F67154E722D4DD6600BDF38C /* Assets.xcassets */,
 				F67154E922D4DD6600BDF38C /* LaunchScreen.storyboard */,
@@ -136,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F67154E322D4DD6500BDF38C /* ViewController.swift in Sources */,
+				F67154F322D4DD7B00BDF38C /* GyroImageView.swift in Sources */,
 				F67154E122D4DD6500BDF38C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,7 +296,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.donbytyqi.GyroImageView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -310,7 +314,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.donbytyqi.GyroImageView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
