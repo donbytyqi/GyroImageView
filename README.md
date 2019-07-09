@@ -14,4 +14,6 @@ let gyroImageView = GyroImageView(frame: UIScreen.main.bounds)
 gyroImageView.image = UIImage(named: "test")
 // set scrolling speed
 gyroImageView.speed = 150.0
+// left, middle or right
+gyroImageView.startPoint = .middle
 view.addSubview(gyroImageView)
