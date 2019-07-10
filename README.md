@@ -25,7 +25,6 @@ gyroImageView.speed = 150.0
 gyroImageView.startPoint = .middle
 
 // allow scrolling in both X and Y axis
-
 gyroImageView.fullScroll = true
 
 view.addSubview(gyroImageView)
