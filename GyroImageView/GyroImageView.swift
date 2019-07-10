@@ -83,8 +83,9 @@ class GyroImageView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        if imageView.frame != scrollView.bounds && image != nil {
-            guard let image = image else { return }
+        guard let image = image else { return }
+        
+        if imageView.frame != scrollView.bounds && imageView.frame.width != image.size.width {
             imageView.frame = CGRect(x: 0, y: 0, width: image.size.width, height: self.frame.height)
             setStartPoint()
         }
