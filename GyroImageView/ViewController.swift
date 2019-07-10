@@ -10,16 +10,15 @@ import UIKit
 
 class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
-    
     let gyroImageView = GyroImageView(frame: UIScreen.main.bounds)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         gyroImageView.image = UIImage(named: "test")
-        gyroImageView.speed = 70.0
+        gyroImageView.speed = 100.0
         gyroImageView.startPoint = .middle
+        gyroImageView.fullScroll = true
         self.view.addSubview(gyroImageView)
         
         self.view.addSubview(choosePhoto)

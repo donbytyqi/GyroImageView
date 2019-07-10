@@ -74,6 +74,9 @@ class GyroImageView: UIView {
     /// Speed of scrolling animation. Default is 70.0.
     var speed: Double = 70.0
     
+    /// Enabling this will allow for scrolling the image in both the X and Y axis.
+    var fullScroll: Bool = false
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(scrollView)
@@ -86,7 +89,7 @@ class GyroImageView: UIView {
         guard let image = image else { return }
         
         if imageView.frame != scrollView.bounds && imageView.frame.width != image.size.width {
-            imageView.frame = CGRect(x: 0, y: 0, width: image.size.width, height: self.frame.height)
+            imageView.frame = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
             setStartPoint()
         }
         
@@ -100,8 +103,9 @@ class GyroImageView: UIView {
         
         motionManager.gyroUpdateInterval = 0.1
         
-        let highestScrollPoint = image.size.width - UIScreen.main.bounds.width
-        let lowestScrollPoint = CGFloat(0.0)
+        let highestScrollPointX = image.size.width - UIScreen.main.bounds.width
+        let highestScrollPointY = image.size.height - UIScreen.main.bounds.height
+        let lowestScrollPoint: CGFloat = 0.0
         
         let mainOperationQueue = OperationQueue.main
         
@@ -109,16 +113,28 @@ class GyroImageView: UIView {
             guard let data = data else { return }
             
             let yRotationRate = data.rotationRate.y
+            let xRotationRate = data.rotationRate.x
             var currentScrollX = self.scrollView.contentOffset.x - CGFloat(yRotationRate * self.speed)
+            var currentScrollY = self.scrollView.contentOffset.y - CGFloat(xRotationRate * self.speed)
             
-            if (currentScrollX > highestScrollPoint) {
-                currentScrollX = highestScrollPoint
+            if (currentScrollX > highestScrollPointX) {
+                currentScrollX = highestScrollPointX
             } else if (currentScrollX < lowestScrollPoint) {
                 currentScrollX = lowestScrollPoint
             }
             
+            if (currentScrollY > highestScrollPointY) {
+                currentScrollY = highestScrollPointY
+            } else if (currentScrollY < lowestScrollPoint) {
+                currentScrollY = lowestScrollPoint
+            }
+            
             UIView.animate(withDuration: 0.5, delay: 0.0, options: [.allowUserInteraction], animations: {
-                self.scrollView.contentOffset = CGPoint(x: currentScrollX, y: CGFloat(0.0))
+                if self.fullScroll {
+                    self.scrollView.contentOffset = CGPoint(x: currentScrollX, y: currentScrollY)
+                } else {
+                    self.scrollView.contentOffset = CGPoint(x: currentScrollX, y: 0.0)
+                }
                 self.scrollView.layoutIfNeeded()
             }, completion: nil)
             
