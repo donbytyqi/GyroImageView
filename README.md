@@ -11,9 +11,21 @@ GyroImageView is fairly easy to implement, simply initiliaze it with a frame and
 
 ```swift
 let gyroImageView = GyroImageView(frame: UIScreen.main.bounds)
+
+// locally set an image
 gyroImageView.image = UIImage(named: "test")
+
+// download an image from a url
+gyroImageView.imageUrl = ""
+
 // set scrolling speed
 gyroImageView.speed = 150.0
+
 // left, middle or right
 gyroImageView.startPoint = .middle
+
+// allow scrolling in both X and Y axis
+
+gyroImageView.fullScroll = true
+
 view.addSubview(gyroImageView)
