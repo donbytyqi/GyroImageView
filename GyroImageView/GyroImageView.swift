@@ -33,15 +33,9 @@ extension GyroImageView {
     }
 }
 
-class GyroImageView: UIView {
+class GyroImageView: UIScrollView {
     
     private let motionManager = CMMotionManager()
-    
-    private let scrollView: UIScrollView = {
-        let scrollView = UIScrollView(frame: UIScreen.main.bounds)
-        scrollView.isUserInteractionEnabled = false
-        return scrollView
-    }()
     
     private let imageView: UIImageView = {
         let iv = UIImageView()
@@ -79,8 +73,7 @@ class GyroImageView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(scrollView)
-        scrollView.addSubview(imageView)
+        addSubview(imageView)
     }
     
     override func layoutSubviews() {
@@ -88,8 +81,12 @@ class GyroImageView: UIView {
         
         guard let image = image else { return }
         
-        if imageView.frame != scrollView.bounds && imageView.frame.width != image.size.width {
-            imageView.frame = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+        if imageView.frame != self.bounds && imageView.frame.width != image.size.width {
+            if fullScroll {
+                imageView.frame = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+            } else {
+                imageView.frame = CGRect(x: 0, y: 0, width: image.size.width, height: self.frame.height)
+            }
             setStartPoint()
         }
         
@@ -114,8 +111,8 @@ class GyroImageView: UIView {
             
             let yRotationRate = data.rotationRate.y
             let xRotationRate = data.rotationRate.x
-            var currentScrollX = self.scrollView.contentOffset.x - CGFloat(yRotationRate * self.speed)
-            var currentScrollY = self.scrollView.contentOffset.y - CGFloat(xRotationRate * self.speed)
+            var currentScrollX = self.contentOffset.x - CGFloat(yRotationRate * self.speed)
+            var currentScrollY = self.contentOffset.y - CGFloat(xRotationRate * self.speed)
             
             if (currentScrollX > highestScrollPointX) {
                 currentScrollX = highestScrollPointX
@@ -131,11 +128,11 @@ class GyroImageView: UIView {
             
             UIView.animate(withDuration: 0.5, delay: 0.0, options: [.allowUserInteraction], animations: {
                 if self.fullScroll {
-                    self.scrollView.contentOffset = CGPoint(x: currentScrollX, y: currentScrollY)
+                    self.contentOffset = CGPoint(x: currentScrollX, y: currentScrollY)
                 } else {
-                    self.scrollView.contentOffset = CGPoint(x: currentScrollX, y: 0.0)
+                    self.contentOffset = CGPoint(x: currentScrollX, y: 0.0)
                 }
-                self.scrollView.layoutIfNeeded()
+                self.layoutIfNeeded()
             }, completion: nil)
             
         })
@@ -146,11 +143,11 @@ class GyroImageView: UIView {
         
         switch startPoint {
         case .left:
-            self.scrollView.contentOffset = CGPoint(x: 0.0, y: 0.0)
+            self.contentOffset = CGPoint(x: 0.0, y: 0.0)
         case .middle:
-            self.scrollView.contentOffset = CGPoint(x: image.size.width / 2, y: 0.0)
+            self.contentOffset = CGPoint(x: image.size.width / 2, y: 0.0)
         case .right:
-            self.scrollView.contentOffset = CGPoint(x: image.size.width - (UIScreen.main.bounds.width), y: 0.0)
+            self.contentOffset = CGPoint(x: image.size.width - (UIScreen.main.bounds.width), y: 0.0)
         }
         
     }

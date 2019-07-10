@@ -18,7 +18,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         gyroImageView.image = UIImage(named: "test")
         gyroImageView.speed = 100.0
         gyroImageView.startPoint = .middle
-        gyroImageView.fullScroll = true
+        gyroImageView.fullScroll = false
         self.view.addSubview(gyroImageView)
         
         self.view.addSubview(choosePhoto)
