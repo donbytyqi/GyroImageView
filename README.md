@@ -12,7 +12,7 @@ GyroImageView is fairly easy to implement, simply initiliaze it with a frame and
 ```swift
 let gyroImageView = GyroImageView(frame: UIScreen.main.bounds)
 
-// locally set an image
+// locally set an image, think of it as a placeholder too if you download imaes :p
 gyroImageView.image = UIImage(named: "test")
 
 // download an image from a url
